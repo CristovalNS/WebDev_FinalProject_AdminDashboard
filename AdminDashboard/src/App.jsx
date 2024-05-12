@@ -12,7 +12,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/batch/:id" element={<BatchDetails />} />
         <Route path="/batch/detail/:id" element={<SingleBatch />} />
-        {/* <Route path="/batches/:batchId" element={<SingleBatch />} /> */}
+        
 
       </Routes>
     </Router>

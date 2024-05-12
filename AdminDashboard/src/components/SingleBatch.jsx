@@ -4,9 +4,13 @@ import '../styles/Dashboard.css';
 import { useParams } from 'react-router-dom';
 
 const SingleBatches = () => {
-  const { batchId } = useParams();
+  // const { batchId } = useParams();
+  const batchId = useParams().id;
   const [batch, setBatch] = useState(null);
   const [error, setError] = useState('');
+
+  console.log("Route to SingleBatches is being rendered");
+
 
   useEffect(() => {
     const fetchBatchDetails = async () => {
