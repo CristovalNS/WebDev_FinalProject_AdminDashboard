@@ -1,0 +1,248 @@
+/* Reset CSS for the entire document to ensure no unwanted margins or paddings */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%; /* Ensure full height */
+  width: 100%; /* Ensure full width */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  overflow-x: hidden; /* Prevent horizontal scrollbar */
+}
+
+body {
+  display: flex; /* Use flex to fill the container */
+  justify-content: center; /* Center the content horizontally if needed */
+  align-items: center; /* Center the content vertically if needed */
+}
+
+.container {
+  background: #122617; /* Ash color */
+  min-height: 100vh; /* Full viewport height */
+  width: 100vw; /* Full viewport width */
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  box-sizing: border-box; /* Include padding in the width calculation */
+}
+
+.header {
+  background-color: #62311F; /* Root Chakra color */
+  color: #FAF9EB; /* Glow color */
+  padding: 10px 30px;
+  grid-column: 1 / -1;
+  margin: 0; /* No space on top */
+  box-sizing: border-box;
+  height: 50px;
+}
+
+.box {
+  background: #DFD9C3; /* Sand color */
+  color: #122617; /* Ash color for text */
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  border-radius: 15px; /* Rounded corners for the box */
+  display: flex;
+  flex-direction: column;
+  min-height: 400px; /* Adjust the min-height as needed */
+}
+.batches-box {
+  background: #DFD9C3; /* Sand color */
+  color: #122617; /* Ash color for text */
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  border-radius: 15px; /* Rounded corners for the box */
+  display: flex;
+  flex-direction: column;
+  min-height: 520px; /* Adjust the min-height as needed */
+}
+
+
+.equal-size {
+  flex-grow: 1; /* Ensure both boxes grow equally */
+}
+
+.box:nth-child(2) {
+  margin-bottom: 20px; /* Add space between notifications and shipments */
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse; /* Collapse table borders */
+  background-color: #ffffff; /* White background for table */
+  border-radius: 15px; /* Rounded corners for the table */
+  overflow: hidden; /* Hide overflow from rounded corners */
+}
+
+.table th {
+  background-color: #848c4c; /* Green background for table header */
+  color: #fff; /* White text color for table header */
+  padding: 15px; /* Increased padding for header cells */
+  text-align: left;
+}
+
+.table th, .table td {
+  padding: 15px; /* Increased padding for table cells */
+  text-align: left;
+  border-bottom: 1px solid #FAF9EB; /* Glow color */
+}
+
+.notification-item {
+  background: linear-gradient(to right, #FAF9EB 50%, #848c4c 50%);
+  border-radius: 20px; /* Decreased border-radius for more rounded edges */
+  padding: 10px 20px; /* Decreased padding for a slimmer rectangle */
+  margin: 5px 0;
+  display: flex; /* Use flexbox */
+  flex-direction: column; /* Change flex direction to stack items vertically */
+}
+
+.notification-info {
+  display: flex;
+  flex-direction: column; /* Display items vertically */
+  gap: 5px; /* Add a small gap between items */
+  align-items: flex-start; /* Align items to the start of the column */
+}
+
+.notification-info span {
+  color: #000000; /* Black text color for notification info label */
+  font-weight: bold;
+  display: block; /* Display as block for vertical layout */
+}
+
+.notification-message {
+  color: #fff; /* White text color for matcha section */
+  background-color: #848c4c; /* Matcha color for background */
+  border-radius: 15px;
+  padding: 5px 10px;
+  margin-left: auto; /* Push the message to the right */
+}
+
+.shipment-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.shipment-data {
+  margin-right: 5px; /* Space between data and status circle */
+}
+
+.status-circles {
+  display: flex;
+  align-items: center;
+}
+
+.circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.circle.moss {
+  background-color: #848c4c; /* Moss color */
+}
+
+.circle.earth {
+  background-color: #DFD9C3; /* Earth color */
+}
+
+.connector {
+  flex-grow: 1;
+  border-top: 2px solid #848c4c; /* Moss color */
+}
+.sand-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #DFD9C3;
+  color: #122617;
+  padding: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  height: 250px;
+}
+.SingleBatchHeader {
+  background-color: #62311F; /* Root Chakra color */
+  color: #FAF9EB; /* Glow color */
+  padding: 10px 30px;
+  margin-bottom: 20px;
+}
+
+.SingleBatchCard {
+  background: #62311F; /* Root Chakra color */
+  color: #FAF9EB; /* Glow color */
+  margin: 20px;
+  padding: 40px;
+  width: 80%;
+  text-align: center;
+  
+}
+.batch-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.batch-id-box {
+  background-color: #DFD9C3; /* Sand color */
+  color: #122617; /* Ash color */
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  padding: 10px;
+  text-align: center;
+  margin-bottom: 10px; /* Add space between the boxes */
+}
+
+.batch-info-box {
+  background-color: #DFD9C3; /* Sand color */
+  color: #122617; /* Ash color */
+  border-radius: 15px;
+  padding: 10px;
+}
+.single-container {
+    background: #122617; /* Ash color */
+    min-height: 100vh; /* Full viewport height */
+    width: 100vw; /* Full viewport width */
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr; /* Changed to 1 column */
+    gap: 20px;
+    box-sizing: border-box; /* Include padding in the width calculation */
+  }
+  .single-id-box {
+    background-color: #DFD9C3; /* Sand color */
+    color: #122617; /* Ash color */
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    text-align: center;
+    margin-bottom: 30px;
+   /* Add space between the boxes */
+    font-size: 50px; 
+    font-weight: bold;
+    height: 150px;
+  }
+  
+  .single-info-box {
+    background-color: #DFD9C3; /* Sand color */
+    color: #122617; /* Ash color */
+    border-radius: 15px;
+    padding: 15px; /* Reduced padding */
+    font-size: 28px; /* Increased font size */
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 250px;
+  }
+  .batches-info {
+    color: black;
+    font-weight: bold;
+    font-size: 17px;
+  }
+
+  
+
+
+
