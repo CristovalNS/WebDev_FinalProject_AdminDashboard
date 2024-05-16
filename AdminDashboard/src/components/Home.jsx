@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 
 const Home = () => {
   const [batches, setBatches] = useState([]);
+  const [shipments, setShipments] = useState([]);
+
 
   useEffect(() => {
     const fetchBatches = async () => {
@@ -19,6 +21,20 @@ const Home = () => {
 
     fetchBatches();
   }, []);
+
+  useEffect(() => {
+    const fetchShipments = async () => {
+      try {
+        const response = await axios.get('http://localhost:8000/shipments/');
+        setShipments(response.data);
+      } catch (error) {
+        console.error('Failed to fetch shipments:', error);
+      }
+    };
+  
+    fetchShipments();
+  }, []);
+  
   
   return (
     <div className="container">
@@ -90,89 +106,37 @@ const Home = () => {
       <div className="equal-size" style={{ gridColumn: "1 / -1" }}>
         {/* Spanning full width */}
         <div className="box">
-          <h2>Shipments</h2>
-          <table className="table rounded">
-            <thead>
-              <tr>
-                <th>Supplier ID</th>
-                <th>Batch ID</th>
-                <th>Shipment ID</th>
-                <th>Weight</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><Link to="/batch/:id">XXXX</Link></td>
-                <td><Link to="/batch/:id">XXXX</Link></td>
-                <td><Link to="/batch/:id">XXXX</Link></td>
-                <td>XX kg</td>
-                <td>
-                  <div className="status-circles">
-                    <div className="circle moss"></div>
-                    <div className="connector"></div>
-                    <div className="circle earth"></div>
-                    <div className="connector"></div>
-                    <div className="circle earth"></div>
-                    <div className="connector"></div>
-                    <div className="circle earth"></div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td><Link to="/batch/:id">XXXX</Link></td>
-                <td><Link to="/batch/:id">XXXX</Link></td>
-                <td><Link to="/batch/:id">XXXX</Link></td>
-                <td>AA kg</td>
-                <td>
-                  <div className="status-circles">
-                    <div className="circle moss"></div>
-                    <div className="connector"></div>
-                    <div className="circle earth"></div>
-                    <div className="connector"></div>
-                    <div className="circle earth"></div>
-                    <div className="connector"></div>
-                    <div className="circle earth"></div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td><Link to="/batch/:id">XXXX</Link></td>
-                <td><Link to="/batch/:id">XXXX</Link></td>
-                <td><Link to="/batch/:id">XXXX</Link></td>
-                <td>BB kg</td>
-                <td>
-                  <div className="status-circles">
-                    <div className="circle moss"></div>
-                    <div className="connector"></div>
-                    <div className="circle earth"></div>
-                    <div className="connector"></div>
-                    <div className="circle earth"></div>
-                    <div className="connector"></div>
-                    <div className="circle earth"></div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td><Link to="/batch/:id">XXXX</Link></td>
-                <td><Link to="/batch/:id">XXXX</Link></td>
-                <td><Link to="/batch/:id">XXXX</Link></td>
-                <td>CC kg</td>
-                <td>
-                  <div className="status-circles">
-                    <div className="circle moss"></div>
-                    <div className="connector"></div>
-                    <div className="circle earth"></div>
-                    <div className="connector"></div>
-                    <div className="circle earth"></div>
-                    <div className="connector"></div>
-                    <div className="circle earth"></div>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+  <h2>Shipments</h2>
+  <table className="table rounded">
+    <thead>
+      <tr>
+        <th>Shipment ID</th>
+        <th>Batch Rescale Weight</th>
+        <th>Sent Date</th>
+        <th>Arrival Date</th>
+        <th>Transport Status</th>
+        <th>Batch ID</th>
+        <th>Harbor Guard ID</th>
+        <th>Harbor ID</th>
+      </tr>
+    </thead>
+    <tbody>
+      {shipments.map((shipment) => (
+        <tr key={shipment.checkpoint_ID}>
+          <td><Link to={`/shipment/${shipment.checkpoint_ID}`}>{shipment.checkpoint_ID}</Link></td>
+          <td>{shipment.harbor_batch_rescale} kg</td>
+          <td>{shipment.sent_date}</td>
+          <td>{shipment.arrival_date}</td>
+          <td>{shipment.transport_status}</td>
+          <td>{shipment.batch_ID}</td>
+          <td>{shipment.hg_user_ID}</td>
+          <td>{shipment.harbor_ID}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
       </div>
     </div>
   );

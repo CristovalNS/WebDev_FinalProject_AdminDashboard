@@ -219,7 +219,8 @@ async def get_batches_by_status(status: int):
 #         print("Error occurred:", err)
 #         return JSONResponse(content={"message": "Failed to update batch status"}, status_code=500)
     
-# Get all shipment information
+# TODO: Why won't it show user_ID? The syntax worked in MySQL
+# Get all shipment information with harbor guard user IDs
 @app.get("/shipments/", response_model=List[HarborCheckpoint])
 def get_all_shipments():
     connection = get_new_connection()
@@ -228,16 +229,38 @@ def get_all_shipments():
 
     try:
         cursor = connection.cursor(dictionary=True)
-        query = "SELECT * FROM harbor_checkpoint"
+        query = """
+        SELECT hc.*, hgu.user_ID
+        FROM harbor_checkpoint hc
+        LEFT JOIN harbor_guard_user hgu ON hc.hg_user_ID = hgu.hg_user_ID
+        """
         cursor.execute(query)
         shipments = cursor.fetchall()
-        cursor.close()
-        connection.close()
-        return shipments
+        print(shipments)  # Debug: Print the raw results
     except Error as err:
-        connection.close()
         raise HTTPException(status_code=500, detail=str(err))
-    
+    finally:
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+
+    formatted_result = []
+    for row in shipments:
+        formatted_row = {
+            "checkpoint_ID": row["checkpoint_ID"],
+            "harbor_batch_rescale": row["harbor_batch_rescale"],
+            "sent_date": row["sent_date"],
+            "arrival_date": row["arrival_date"],
+            "transport_status": row["transport_status"],
+            "batch_ID": row["batch_ID"],
+            "hg_user_ID": row["hg_user_ID"],
+            "harbor_ID": row["harbor_ID"],
+            "user_ID": row.get("user_ID") 
+        }
+        formatted_result.append(formatted_row)
+    return formatted_result
+
+
 # Get 1 shipment information
 @app.get("/shipments/{shipment_id}", response_model=HarborCheckpoint)
 def get_shipment_by_id(shipment_id: int = Path(..., title="The ID of the shipment to retrieve")):
@@ -247,7 +270,12 @@ def get_shipment_by_id(shipment_id: int = Path(..., title="The ID of the shipmen
 
     try:
         cursor = connection.cursor(dictionary=True)
-        query = "SELECT * FROM harbor_checkpoint WHERE checkpoint_ID = %s"
+        query = """
+       SELECT hc.*, hgu.user_ID
+        FROM harbor_checkpoint hc
+        LEFT JOIN harbor_guard_user hgu ON hc.hg_user_ID = hgu.hg_user_ID
+        WHERE hc.checkpoint_ID = %s
+        """
         cursor.execute(query, (shipment_id,))
         shipment = cursor.fetchone()
         cursor.close()
@@ -260,6 +288,7 @@ def get_shipment_by_id(shipment_id: int = Path(..., title="The ID of the shipmen
     except Error as err:
         connection.close()
         raise HTTPException(status_code=500, detail=str(err))
+
     
 # Delete a shipment
 @app.delete("/delete-shipment/{checkpoint_id}")
@@ -300,3 +329,4 @@ def delete_batch(batch_id: int = Path(..., description="The ID of the batch orde
     except Error as err:
         connection.close()
         raise HTTPException(status_code=500, detail=str(err))
+    

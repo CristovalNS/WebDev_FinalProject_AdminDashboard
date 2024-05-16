@@ -61,6 +61,7 @@ class HarborCheckpoint(BaseModel):
     batch_ID: int
     hg_user_ID: int
     harbor_ID: int
+    user_ID: Optional[str]
 
 class HarborCheckpointInformation(BaseModel):
     checkpoint_ID: int
