@@ -1,2 +1,2 @@
-# WebDev_FinalProject_AdminDashboard
-Admin Dashboard for WADS Final Project
+# WebDev_FinalProject_APIs
+APIs for WADS Final Project

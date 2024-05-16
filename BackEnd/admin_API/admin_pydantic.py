@@ -60,3 +60,15 @@ class HarborCheckpoint(BaseModel):
     transport_status: str
     batch_ID: int
     hg_user_ID: int
+
+class HarborCheckpointInformation(BaseModel):
+    checkpoint_ID: int
+    harbour_batch_rescale: float
+    sent_date: datetime
+    arrival_date: datetime
+    transport_status: str
+    batch_ID: int
+    dry_leaves_ID: Optional[int]
+    wet_leaves_ID: Optional[int]
+    powdered_leaves_ID: Optional[int]
+    hg_user_ID: int

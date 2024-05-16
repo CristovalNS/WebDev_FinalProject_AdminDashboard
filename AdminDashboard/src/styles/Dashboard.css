@@ -32,7 +32,8 @@ body {
   grid-column: 1 / -1;
   margin: 0; /* No space on top */
   box-sizing: border-box;
-  height: 50px;
+  height: 60px;
+  font-size: 30px;
 }
 
 .box {
