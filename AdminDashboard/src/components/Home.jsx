@@ -129,7 +129,7 @@ const Home = () => {
           <td>{shipment.arrival_date}</td>
           <td>{shipment.transport_status}</td>
           <td>{shipment.batch_ID}</td>
-          <td>{shipment.user_ID}</td>
+          <td>{shipment.hg_user_ID}</td>
           <td>{shipment.harbor_ID}</td>
         </tr>
       ))}
