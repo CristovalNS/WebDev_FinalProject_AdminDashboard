@@ -1,4 +1,5 @@
 from fastapi import FastAPI, HTTPException, Body
+from fastapi.middleware.cors import CORSMiddleware
 import requests
 from login_pydantic import *
 import mysql.connector
@@ -12,6 +13,13 @@ firebase_admin.initialize_app(cred)
 
 app = FastAPI()
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"], 
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 def create_mysql_connection():
     try:
@@ -27,7 +35,7 @@ def create_mysql_connection():
     
 
 # API Endpoints
-# Register user
+# Register user endpoint
 @app.post("/register")
 def register_user(user: UserRegistration):
     connection = create_mysql_connection()
@@ -39,9 +47,9 @@ def register_user(user: UserRegistration):
                 password=user.password
             )
             
-            # Insert the user into the user_account table
-            user_account_query = "INSERT INTO user_account (user_id, email, user_type_id) VALUES (%s, %s, %s)"
-            user_account_data = (user_record.uid, user.email, user.user_type)
+            # Insert the user into SQL Database
+            user_account_query = "INSERT INTO user_account (user_id, email, username, user_type_id) VALUES (%s, %s, %s, %s)"
+            user_account_data = (user_record.uid, user.email, user.username, user.user_type)
             cursor = connection.cursor()
             cursor.execute(user_account_query, user_account_data)
             connection.commit()
@@ -58,7 +66,7 @@ def register_user(user: UserRegistration):
                 cursor.execute(harbor_query, (user_record.uid,))
             
             connection.commit()
-            return {"uid": user_record.uid, "email": user.email, "user_type": user.user_type}
+            return {"uid": user_record.uid, "email": user.email, "username": user.username, "user_type": user.user_type}
         
         except exceptions.FirebaseError as e:
             connection.rollback()
@@ -89,3 +97,4 @@ async def login(email: str = Body(...), password: str = Body(...)):
         return {"uid": user_info['localId'], "email": user_info['email']}
     else:
         raise HTTPException(status_code=401, detail="Authentication failed")
+    

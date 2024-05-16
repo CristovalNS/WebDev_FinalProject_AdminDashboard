@@ -1,0 +1,702 @@
+/* style.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+body {
+  background-color: #62311F;
+  margin: 0;
+  overflow: hidden;
+  font-family: 'Inter', sans-serif;
+}
+
+.flex-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 60%;
+  height: 100%;
+  background-color: #62311F;
+}
+
+/* Adjustments for smaller screens */
+@media (max-width: 500px) {
+  .user-label,
+  .pass-label,
+  .signup-label,
+  .forgotpass-label,
+  .signup-label,
+  .fullname-label,
+  .email-label,
+  .signuppass-label,
+  .confirmpass-label,
+  .fp-label,
+  .back-label,
+  .pass-rplabel,
+  .confirm-rplabel,
+  .resetback-label,
+  .login-label{
+    width: 100%;
+    text-align: left;
+    white-space: normal;
+  }
+  .signup-title,
+  .login-title,
+  .forgotpass-title,
+  .resetpass-title{
+    white-space: normal;
+    text-align: center;
+  }
+}
+
+.main-content {
+  position: relative;
+  width: 40%;
+  background-color: #122617;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-left: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+
+/* Login Page */
+.user-label,
+.pass-label,
+.forgotpass-label,
+.signup-label,
+.login-label {
+  position: absolute;
+  top: 26%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  font-size: 0.8rem;
+  color: #FAF9EB;
+}
+
+.signup-label,
+.login-label {
+  top: 87%;
+}
+
+.login-title {
+  position: absolute;
+  top: 16%;
+  left: 52%;
+  transform: translateX(-50%) translateY(-50%); /* Center horizontally and vertically */
+  font-size: 1.5rem;
+  color: #FAF9EB;
+}
+
+.user-label { /*Email or phone number*/
+  position: absolute;
+  top: 26%;
+  left: 36%;
+  transform: translateX(-50%) translateY(-50%);
+  font-size: 0.8rem;
+  color: #FAF9EB;
+}
+
+.user_text-field {
+  position: absolute;
+  top: 31%;
+  left: 53%;
+  transform: translateX(-50%) translateY(-50%);
+  width: 55%;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 20px;
+  border: 1px solid #DFD9C3;
+  background-color: #DFD9C3;
+}
+
+.user_text-field:focus {
+  border-color: #B6A248;
+  outline: none;
+}
+
+.pass-label { /*Password*/
+  position: absolute;
+  top: 36%;
+  left: 36%;
+  transform: translateX(-50%) translateY(-50%);
+  font-size: 0.8rem;
+  color: #FAF9EB;
+}
+
+.pass_text-field {
+  position: absolute;
+  top: 41%;
+  left: 53%;
+  transform: translateX(-50%) translateY(-50%);
+  width: 55%;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 20px;
+  border: 1px solid #DFD9C3;
+  background-color: #DFD9C3;
+}
+
+.pass_text-field:focus {
+  border-color: #B6A248;
+  outline: none;
+}
+
+.login-button {
+  position: absolute;
+  top: 51%;
+  left: 53%;
+  transform: translateX(-50%) translateY(-50%);
+  width: 30%;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 20px;
+  color: #FAF9EB;
+  border: 1px solid #B6A248;
+  background-color: #B6A248;
+  overflow: hidden;
+}
+
+.login-button:hover {
+  background-color: #938D6C;
+}
+
+.alternative-login {
+  display: flex;
+  position: absolute;
+  top: 58%;
+  left: 53%;
+  transform: translateX(-50%) translateY(-50%);
+  align-items: center;
+  width: 60%;
+  margin: 20px 0;
+}
+
+.alternative-login .line {
+  flex-grow: 1;
+  height: 1px;
+  background-color: #FAF9EB;
+  margin: 0 10px;
+}
+
+.separator-text { /*or log in with*/
+  color: #FAF9EB;
+  font-size: 14px;
+}
+
+.button-container {
+  display: flex;
+  position: absolute;
+  top: 69%;
+  left: 54%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.icon-button {
+  width: 50px;
+  height: 50px;
+  margin-right: 20px;
+  background-color: #FAF9EB;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.icon-button:last-child { /*align the alternatives side by side if there's more than one*/
+  margin-right: 0;
+}
+
+.icon-button:hover {
+  background-color: #DFD9C3;
+}
+
+.forgotpass-label {
+  position: absolute;
+  top: 75%;
+  left: 52%;
+  transform: translateX(-50%) translateY(-50%);
+  font-size: 0.8rem;
+  color: #FAF9EB;
+}
+
+.signup-label {
+  position: absolute;
+  top: 82%;
+  left: 37%;
+  transform: translateX(-50%) translateY(-50%);
+  font-size: 0.8rem;
+  color: #FAF9EB;
+}
+
+@media (max-width: 500px) {
+  .user_text-field{top: 32%;}
+  .forgotpass-label{left: 65%;}
+  .user-label{left: 50%;}
+  .pass-label{left: 50%;}
+  .signup-label{left: 50%;}
+}
+
+
+/* Register Page */
+.fullname-label,
+.email-label,
+.signuppass-label,
+.confirmpass-label {
+  position: absolute;
+  top: 22%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px; /* Adjust width as needed */
+  font-size: 0.8rem;
+  color: #FAF9EB;
+}
+
+.email-label,
+.confirmpass-label {
+  top: 32%;
+}
+
+.signuppass-label,
+.confirmpass-label {
+  top: 42%;
+}
+
+.signup-title {
+  position: absolute;
+  top: 12%;
+  left: 52%;
+  transform: translateX(-50%) translateY(-50%);
+  font-size: 1.5rem;
+  color: #FAF9EB;
+}
+
+.fullname-label {
+  position: absolute;
+  top: 22%;
+  left: 37%;
+  transform: translateX(-50%) translateY(-50%);
+  font-size: 0.8rem;
+  color: #FAF9EB;
+}
+
+.fullname_text-field {
+  position: absolute;
+  top: 27%;
+  left: 53%;
+  transform: translateX(-50%) translateY(-50%);
+  width: 55%;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 20px;
+  border: 1px solid #DFD9C3;
+  background-color: #DFD9C3;
+}
+
+.fullname_text-field:focus {
+  border-color: #B6A248;
+  outline: none;
+}
+
+.email-label {
+  position: absolute;
+  top: 32%;
+  left: 37%;
+  transform: translateX(-50%) translateY(-50%);
+  font-size: 0.8rem;
+  color: #FAF9EB;
+}
+
+.email_text-field {
+  position: absolute;
+  top: 37%;
+  left: 53%;
+  transform: translateX(-50%) translateY(-50%);
+  width: 55%;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 20px;
+  border: 1px solid #DFD9C3;
+  background-color: #DFD9C3;
+}
+
+.email_text-field:focus {
+  border-color: #B6A248;
+  outline: none;
+}
+
+.signuppass-label { /*Password*/
+  position: absolute;
+  top: 42%;
+  left: 37%;
+  transform: translateX(-50%) translateY(-50%);
+  font-size: 0.8rem;
+  color: #FAF9EB;
+}
+
+.signuppass_text-field {
+  position: absolute;
+  top: 47%;
+  left: 53%;
+  transform: translateX(-50%) translateY(-50%);
+  width: 55%;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 20px;
+  border: 1px solid #DFD9C3;
+  background-color: #DFD9C3;
+}
+
+.signuppass_text-field:focus {
+  border-color: #B6A248;
+  outline: none;
+}
+
+.confirmpass-label { /*Confirm Password*/
+  position: absolute;
+  top: 52%;
+  left: 37%;
+  transform: translateX(-50%) translateY(-50%);
+  font-size: 0.8rem;
+  color: #FAF9EB;
+}
+
+.confirmpass_text-field {
+  position: absolute;
+  top: 57%;
+  left: 53%;
+  transform: translateX(-50%) translateY(-50%);
+  width: 55%;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 20px;
+  border: 1px solid #DFD9C3;
+  background-color: #DFD9C3;
+}
+
+.confirmpass_text-field:focus {
+  border-color: #B6A248;
+  outline: none;
+}
+
+.signup-button {
+  position: absolute;
+  top: 65%;
+  left: 53%;
+  transform: translateX(-50%) translateY(-50%);
+  width: 30%;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 20px;
+  color: #FAF9EB;
+  border: 1px solid #B6A248;
+  background-color: #B6A248;
+  overflow: hidden;
+}
+
+.signup-button:hover {
+  background-color: #938D6C;
+}
+
+.alternative-signup {
+  display: flex;
+  position: absolute;
+  top: 70%;
+  left: 53%;
+  transform: translateX(-50%) translateY(-50%);
+  align-items: center;
+  width: 60%;
+  margin: 20px 0;
+}
+
+.alternative-signup .line {
+  flex-grow: 1;
+  height: 1px;
+  background-color: #FAF9EB;
+  margin: 0 10px;
+}
+
+.signupbtn-container { /*Container for alternatives*/
+  display: flex;
+  position: absolute;
+  top: 80%;
+  left: 54%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.login-label {
+  position: absolute;
+  top: 87%;
+  left: 40%;
+  transform: translateX(-50%) translateY(-50%);
+  font-size: 0.8rem;
+  color: #FAF9EB;
+}
+
+@media (max-width: 500px) {
+  .email_text-field{top: 38%;}
+  .fullname-label{left: 50%;}
+  .email-label{left: 50%;}
+  .signuppass-label{left: 50%;}
+  .confirmpass-label{left: 50%;}
+  .login-label{left: 50%;}
+}
+
+
+/* Forgot Password Page */
+.desc-label,
+.fp-label,
+.back-label,
+.forgotpass-title {
+  position: absolute;
+  top: 28%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px; /* Adjust width as needed */
+  font-size: 0.8rem;
+  color: #FAF9EB;
+}
+
+.fp-label,
+.back-label {
+  top: 46%;
+}
+
+.forgotpass-title {
+  position: absolute;
+  top: 28%;
+  left: 40%;
+  transform: translateX(-50%) translateY(-50%);
+  font-size: 1.5rem;
+  color: #FAF9EB;
+}
+
+.desc-label {
+  position: absolute;
+  top: 37%;
+  left: 53%;
+  transform: translateX(-50%) translateY(-50%);
+  font-size: 0.8rem;
+  color: #FAF9EB;
+  width: 350px;
+  white-space: normal;
+  text-align: center;
+}
+
+.fp-label { /*Email address or phone number*/
+  position: absolute;
+  top: 46%;
+  left: 34%;
+  transform: translateX(-50%) translateY(-50%);
+  font-size: 0.8rem;
+  color: #FAF9EB;
+}
+
+.fp_text-field {
+  position: absolute;
+  top: 51%;
+  left: 53%;
+  transform: translateX(-50%) translateY(-50%);
+  width: 55%;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 20px;
+  border: 1px solid #DFD9C3;
+  background-color: #DFD9C3;
+}
+
+.fp_text-field:focus {
+  border-color: #B6A248;
+  outline: none;
+}
+
+.reset-button {
+  position: absolute;
+  top: 60%;
+  left: 53%;
+  transform: translateX(-50%) translateY(-50%);
+  width: 30%;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 20px;
+  color: #FAF9EB;
+  border: 1px solid #B6A248;
+  background-color: #B6A248;
+  overflow: hidden;
+}
+
+.reset-button:hover {
+  background-color: #938D6C;
+}
+
+.back-label { /*Back to login*/
+  position: absolute;
+  top: 65%;
+  left: 58%;
+  transform: translateX(-50%) translateY(-50%);
+  font-size: 0.8rem;
+  color: #FAF9EB;
+}
+
+@media (max-width: 920px) {
+  .desc-label {
+    width: 300px;
+  }
+  .forgotpass-title{
+    white-space: normal;
+    text-align: center;
+    top: 25%;
+    left: 50%;
+  }
+}
+
+@media (max-width: 760px) {
+  .desc-label {
+    width: 250px;
+  }
+  .back-label{left: 60%;}
+}
+
+@media (max-width: 630px) {
+  .desc-label {
+    width: 200px;
+  }
+  .back-label{left: 63%;}
+}
+
+@media (max-width: 500px) {
+  .desc-label{width: 150px;}
+  .forgotpass-title{top: 20%;}
+  .fp-label{
+    left: 50%;
+    top: 48%;
+  }
+  .fp_text-field{top: 54%;}
+  .reset-button{top: 62%;}
+  .back-label{top: 67%; left: 63%;}
+}
+
+
+/* Reset Pass Page */
+.pass-rplabel,
+.confirm-rplabel,
+.resetback-label,
+.resetpass-title {
+  position: absolute;
+  top: 28%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px; /* Adjust width as needed */
+  font-size: 0.8rem;
+  color: #FAF9EB;
+}
+
+.confirm-rplabel,
+.resetback-label {
+  top: 47%;
+}
+
+.resetpass-title {
+  position: absolute;
+  top: 28%;
+  left: 46%;
+  transform: translateX(-50%) translateY(-50%);
+  font-size: 1.5rem;
+  color: #FAF9EB;
+}
+
+.pass-rplabel {
+  position: absolute;
+  top: 37%;
+  left: 34%;
+  transform: translateX(-50%) translateY(-50%);
+  font-size: 0.8rem;
+  color: #FAF9EB;
+}
+
+.pass_rptext-field {
+  position: absolute;
+  top: 42%;
+  left: 53%;
+  transform: translateX(-50%) translateY(-50%);
+  width: 55%;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 20px;
+  border: 1px solid #DFD9C3;
+  background-color: #DFD9C3;
+}
+
+.pass_rptext-field:focus {
+  border-color: #B6A248;
+  outline: none;
+}
+
+.confirm-rplabel {
+  position: absolute;
+  top: 47%;
+  left: 34%;
+  transform: translateX(-50%) translateY(-50%);
+  font-size: 0.8rem;
+  color: #FAF9EB;
+}
+
+.confirm_rptext-field {
+  position: absolute;
+  top: 52%;
+  left: 53%;
+  transform: translateX(-50%) translateY(-50%);
+  width: 55%;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 20px;
+  border: 1px solid #DFD9C3;
+  background-color: #DFD9C3;
+}
+
+.confirm_rptext-field:focus {
+  border-color: #B6A248;
+  outline: none;
+}
+
+.resetpass-button {
+  position: absolute;
+  top: 61%;
+  left: 53%;
+  transform: translateX(-50%) translateY(-50%);
+  width: 30%;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 20px;
+  color: #FAF9EB;
+  border: 1px solid #B6A248;
+  background-color: #B6A248;
+  overflow: hidden;
+}
+
+.resetpass-button:hover {
+  background-color: #938D6C;
+}
+
+.resetback-label { /*Back to login*/
+  position: absolute;
+  top: 66%;
+  left: 57%;
+  transform: translateX(-50%) translateY(-50%);
+  font-size: 0.8rem;
+  color: #FAF9EB;
+}
+
+@media (max-width: 550px) {
+  .resetpass-title{
+    white-space: normal;
+    text-align: center;
+  }
+  .pass-rplabel{left: 50%;}
+  .confirm-rplabel{left: 50%;}
+  .resetback-label{left: 62%;}
+}
+
