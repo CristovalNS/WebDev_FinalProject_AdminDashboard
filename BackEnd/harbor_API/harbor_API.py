@@ -1,24 +1,10 @@
-import random
-import os
-import shutil
-from typing import List
-
-from fastapi import FastAPI, UploadFile, File
+from typing import List, Optional
+from fastapi import FastAPI, UploadFile, File, HTTPException
 from fastapi.responses import JSONResponse, FileResponse
 from fastapi.middleware.cors import CORSMiddleware
-
+from mysql.connector import Error
 from harbor_pydantic import *
-
 import mysql.connector
-
-import datetime
-
-connect = mysql.connector.connect(
-    host='127.0.0.1',
-    user='root',
-    password='*neoSQL01',
-    database='central_database'
-)
 
 app = FastAPI()
 
@@ -30,83 +16,38 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get("/harbor/get_all_shipments/{harbor_id}", response_model=List[HarborCheckpoint])
-def get_all_shipments(harbor_id):
-    db = connect.cursor()
-    db.execute("SELECT harbor_checkpoint.* FROM harbor_checkpoint "
-               "JOIN harbor_guard_user ON harbor_checkpoint.hg_user_ID = harbor_guard_user.hg_user_ID "
-               "WHERE harbor_guard_user.hg_user_ID = %s "
-               "ORDER BY harbor_checkpoint.sent_date DESC;",
-               (harbor_id,))
-    return db.fetchall()
-
-
-@app.get("/harbor/get_recent_shipments/{harbor_id}/{n}", response_model=List[HarborCheckpoint])
-def get_recent_shipments(harbor_id, n):
-    db = connect.cursor()
-    db.execute("SELECT harbor_checkpoint.* FROM harbor_checkpoint "
-               "JOIN harbor_guard_user ON harbor_checkpoint.hg_user_ID = harbor_guard_user.hg_user_ID "
-               "WHERE harbor_guard_user.hg_user_ID = %s "
-               "ORDER BY harbor_checkpoint.sent_date DESC;",
-               (harbor_id,))
-    return db.fetchall()[:int(n)]
-
-
-@app.get("/harbor/get_shipment/{harbor_id}/{shipment_id}", response_model=HarborCheckpoint)
-def get_shipment(harbor_id, shipment_id):
-    db = connect.cursor()
-    db.execute("SELECT harbor_checkpoint.* FROM harbor_checkpoint "
-               "JOIN harbor_guard_user ON harbor_checkpoint.hg_user_ID = harbor_guard_user.hg_user_ID "
-               "WHERE harbor_guard_user.hg_user_ID = %s "
-               "AND harbor_checkpoint.checkpoint_ID = %s;",
-               (harbor_id, shipment_id))
-    i = db.fetchone()
-    if len(i) == 1:
-        return i[0]
-    return "not found"
-
-
-@app.put("/updateShipment/{harbor_id}/{shipment_id}/{status}")
-def update_shipment(harbor_id, shipment_id, status):
-    db = connect.cursor()
-    db.execute("UPDATE harbor_checkpoint "
-                "JOIN harbor_guard_user ON harbor_checkpoint.hg_user_ID = harbor_guard_user.hg_user_ID "
-                "SET harbor_checkpoint.transport_status = %s "
-                "WHERE harbor_guard_user.hg_user_ID = %s "
-                "AND harbor_checkpoint.checkpoint_ID = %s;",
-               (status, harbor_id, shipment_id))
-    connect.commit()
-
-
-@app.post("/addPhoto/{harbor_id}/{shipment_id}")
-async def upload_photo(harbor_id, shipment_id, file: UploadFile = File(...)):
+# Establishing MySQL Server Connection (Currently Local)
+def get_new_connection():
     try:
-        db = connect.cursor()
-        db.execute("SELECT harbor_checkpoint.checkpoint_ID FROM harbor_checkpoint "
-                   "JOIN harbor_guard_user ON harbor_checkpoint.hg_user_ID = harbor_guard_user.hg_user_ID "
-                   "WHERE harbor_guard_user.hg_user_ID = %s "
-                   "AND harbor_checkpoint.checkpoint_ID = %s;",
-                   (harbor_id, shipment_id))
-        shipment_id = db.fetchone()
-        if len(shipment_id) == 1:
-            shipment_id = shipment_id[0]
-            try:
-                db.execute("INSERT INTO checkpoint_pictures (checkpointID, image_path) "
-                           "values (%s, %s)", (shipment_id, "uploads/" + file.filename))
-                with open(os.path.join("uploads", file.filename), "wb") as buffer:
-                    shutil.copyfileobj(file.file, buffer)
-                return {"message": "File uploaded successfully"}
-            except:
-                return "Unknown error"
-        else:
-            return {"error": "invalid harbor id/checkpoint id"}
-    except Exception as e:
-        return {"error": str(e)}
+        connection = mysql.connector.connect(
+            host="127.0.0.1",
+            user="root",
+            passwd="*neoSQL01",
+            database="central_database"
+        )
+        print("MySQL Database connection successful")
+        return connection
+    except Error as err:
+        print(f"Error: '{err}'")
+        return None
 
-
-@app.get("/getPhoto/{path}")
-def get_photo(path):
-    if os.path.exists(path):
-        return FileResponse(path=path)
-    else:
-        return JSONResponse(content={"error": "File not found"}, status_code=404)
+#API Endpoints
+# Get shipment based on harbor_ID
+@app.get("/shipment/{harbor_ID}", response_model=List[HarborCheckpoint])
+def get_shipment_by_harbor(harbor_ID: int):
+    conn = get_new_connection()
+    if conn is None:
+        raise HTTPException(status_code=500, detail="Database connection failed")
+    cursor = conn.cursor(dictionary=True)  # Use dictionary to directly map query results to model fields
+    try:
+        cursor.execute("SELECT * FROM harbor_checkpoint WHERE harbor_ID = %s", (harbor_ID,))
+        result = cursor.fetchall()
+        if not result:
+            raise HTTPException(status_code=404, detail="Shipment not found")
+        return [HarborCheckpoint(**row) for row in result]
+    except Error as e:
+        print(f"Database error: {e}")
+        raise HTTPException(status_code=500, detail=f"Database query failed: {e}")
+    finally:
+        cursor.close()
+        conn.close()

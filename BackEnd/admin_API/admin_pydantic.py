@@ -60,6 +60,7 @@ class HarborCheckpoint(BaseModel):
     transport_status: int
     batch_ID: int
     hg_user_ID: int
+    harbor_ID: int
 
 
 class HarborCheckpointInformation(BaseModel):
