@@ -200,23 +200,24 @@ async def get_batches_by_status(status: int):
     except Error as err:
         raise HTTPException(status_code=500, detail=str(err))
 
+# TODO: This piece seems redundant for Admin, since Admin is only for viewing data
 # Update order as finished
-@app.put("/toggle-batch-status/{batch_id}")
-def toggle_batch_status(batch_id: int = Path(..., description="The ID of the batch to toggle the status")):
-    connection = get_new_connection()
-    if connection is None:
-        raise HTTPException(status_code=500, detail="Database connection failed")
+# @app.put("/toggle-batch-status/{batch_id}")
+# def toggle_batch_status(batch_id: int = Path(..., description="The ID of the batch to toggle the status")):
+#     connection = get_new_connection()
+#     if connection is None:
+#         raise HTTPException(status_code=500, detail="Database connection failed")
     
-    try:
-        cursor = connection.cursor()
-        toggle_status_query = "UPDATE batch_information SET status = NOT status WHERE batch_ID = %s"
-        cursor.execute(toggle_status_query, (batch_id,))
-        connection.commit()
-        cursor.close()
-        return JSONResponse(content={"message": "Batch status updated successfully"}, status_code=200)
-    except mysql.connector.Error as err:
-        print("Error occurred:", err)
-        return JSONResponse(content={"message": "Failed to update batch status"}, status_code=500)
+#     try:
+#         cursor = connection.cursor()
+#         toggle_status_query = "UPDATE batch_information SET status = NOT status WHERE batch_ID = %s"
+#         cursor.execute(toggle_status_query, (batch_id,))
+#         connection.commit()
+#         cursor.close()
+#         return JSONResponse(content={"message": "Batch status updated successfully"}, status_code=200)
+#     except mysql.connector.Error as err:
+#         print("Error occurred:", err)
+#         return JSONResponse(content={"message": "Failed to update batch status"}, status_code=500)
     
 # Get all shipment information
 @app.get("/shipments/", response_model=List[HarborCheckpoint])
