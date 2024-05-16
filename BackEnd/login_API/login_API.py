@@ -38,14 +38,28 @@ def register_user(user: UserRegistration):
                 email=user.email,
                 password=user.password
             )
-            # Prepare a MySQL query
-            query = "INSERT INTO user_account (user_id, email, user_type_id) VALUES (%s, %s, %s)"
-            data = (user_record.uid, user.email, user.user_type)
             
+            # Insert the user into the user_account table
+            user_account_query = "INSERT INTO user_account (user_id, email, user_type_id) VALUES (%s, %s, %s)"
+            user_account_data = (user_record.uid, user.email, user.user_type)
             cursor = connection.cursor()
-            cursor.execute(query, data)
+            cursor.execute(user_account_query, user_account_data)
+            connection.commit()
+            
+            # Insert the user into the respective type-specific table
+            if user.user_type == 1:  # Admin
+                admin_query = "INSERT INTO admin_user (user_id) VALUES (%s)"
+                cursor.execute(admin_query, (user_record.uid,))
+            elif user.user_type == 2:  # Centra
+                centra_query = "INSERT INTO centra_user (user_id) VALUES (%s)"
+                cursor.execute(centra_query, (user_record.uid,))
+            elif user.user_type == 3:  # Harbor
+                harbor_query = "INSERT INTO harbor_guard_user (user_id) VALUES (%s)"
+                cursor.execute(harbor_query, (user_record.uid,))
+            
             connection.commit()
             return {"uid": user_record.uid, "email": user.email, "user_type": user.user_type}
+        
         except exceptions.FirebaseError as e:
             connection.rollback()
             raise HTTPException(status_code=400, detail=str(e))
