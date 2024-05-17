@@ -1,0 +1,122 @@
+.frameChild {
+  width: 320px;
+  height: 132px;
+  position: relative;
+  border-radius: var(--br-11xl);
+  background-color: var(--matcha);
+  display: none;
+  z-index: 0;
+}
+.shippingIdXxxxxxxxxx {
+  position: relative;
+  font-weight: 600;
+  z-index: 1;
+}
+.shippingIDLabel {
+  height: 22px;
+  width: 22px;
+  position: relative;
+  border-radius: 50%;
+  background-color: var(--earth);
+  z-index: 1;
+}
+.sentOnDateLabelChild {
+  align-self: stretch;
+  height: 1px;
+  position: relative;
+  background-color: var(--sand);
+  border-top: 1px solid var(--sand);
+  box-sizing: border-box;
+  z-index: 2;
+}
+.sentOnDateLabel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 0 0 var(--padding-3xs);
+}
+.frameItem {
+  height: 22px;
+  width: 22px;
+  position: relative;
+  border-radius: 50%;
+  background-color: var(--sand);
+  z-index: 1;
+}
+.sentOnDateLabelParent {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+.ongoingShipmentLabel {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 0 var(--padding-mid) 0 0;
+}
+.sentOnDate {
+  width: 122px;
+  position: relative;
+  display: inline-block;
+  font-weight: 300;
+  z-index: 1;
+}
+.ongoingShipmentLabelParent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+  gap: var(--gap-mini);
+  min-width: 147px;
+}
+.fRAME,
+.shippingIDLabelParent {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.shippingIDLabelParent {
+  flex: 1;
+  flex-wrap: wrap;
+  row-gap: 20px;
+}
+.fRAME {
+  align-self: stretch;
+  padding: 0 0 0 var(--padding-lg);
+  text-align: right;
+}
+.frameInner {
+  width: 22px;
+  height: 22px;
+  position: absolute;
+  margin: 0 !important;
+  top: calc(50% - 11px);
+  left: calc(50% - 11px);
+  border-radius: 50%;
+  background-color: var(--sand);
+  z-index: 3;
+}
+.rectangleParent {
+  align-self: stretch;
+  border-radius: var(--br-11xl);
+  background-color: var(--matcha);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--padding-4xl) var(--padding-8xl);
+  position: relative;
+  gap: var(--gap-mini);
+  text-align: left;
+  font-size: var(--font-size-sm);
+  color: var(--sand);
+  font-family: var(--font-inter);
+}

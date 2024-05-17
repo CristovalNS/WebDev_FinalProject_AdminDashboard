@@ -1,0 +1,92 @@
+.h2,
+.shippingHistory {
+  margin: 0;
+  position: relative;
+  font-family: inherit;
+}
+.h2 {
+  font-size: inherit;
+  font-weight: 400;
+  display: inline-block;
+  min-width: 23px;
+}
+.shippingHistory {
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+}
+.frameChild,
+.frameParent,
+.parent {
+  align-self: stretch;
+  display: flex;
+  align-items: flex-start;
+}
+.parent {
+  flex-direction: row;
+  justify-content: space-between;
+  gap: var(--gap-xl);
+}
+.frameChild,
+.frameParent {
+  justify-content: flex-start;
+  font-family: var(--font-inter);
+}
+.frameChild {
+  width: 100%;
+  border: 0;
+  outline: 0;
+  background-color: var(--sand);
+  height: 43px;
+  border-radius: var(--br-11xl);
+  flex-direction: row;
+  padding: var(--padding-xs) 28px;
+  box-sizing: border-box;
+  font-weight: 200;
+  font-size: var(--font-size-base);
+  color: var(--ash);
+  min-width: 192px;
+}
+.frameParent {
+  flex-direction: column;
+  padding: 0 0 var(--padding-3xs);
+  gap: 17px;
+  text-align: left;
+  font-size: var(--font-size-5xl);
+  color: var(--color-black);
+}
+.mharborShippingHistoryChild {
+  width: 100%;
+  height: 78px;
+  position: absolute;
+  margin: 0 !important;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: var(--ash);
+  z-index: 1;
+}
+.backgroundContainer {
+  align-self: stretch;
+  height: 132px;
+  position: relative;
+  border-radius: var(--br-11xl);
+  background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), #848d4c;
+}
+.mharborShippingHistory {
+  width: 100%;
+  position: relative;
+  background-color: var(--glow);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--padding-46xl) var(--padding-16xl) var(--padding-7xs);
+  box-sizing: border-box;
+  gap: var(--gap-9xl);
+  line-height: normal;
+  letter-spacing: normal;
+}
+.backButton {
+  text-decoration: none; 
+}

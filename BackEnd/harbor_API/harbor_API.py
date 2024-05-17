@@ -40,10 +40,17 @@ def get_all_shipments():
         raise HTTPException(status_code=500, detail="Database connection failed")
     cursor = conn.cursor(dictionary=True)
     try:
-        cursor.execute("SELECT * FROM harbor_checkpoint")
+        cursor.execute("SELECT hc.*, bs.status_description AS transport_status_description FROM harbor_checkpoint hc JOIN batch_status bs ON hc.transport_status = bs.status_ID")
         result = cursor.fetchall()
         if not result:
             raise HTTPException(status_code=404, detail="No shipments found")
+        
+        # Log and validate the fetched data
+        print("Fetched Data:", result)
+        for row in result:
+            if 'transport_status_description' not in row:
+                raise HTTPException(status_code=500, detail="Missing required data: transport_status_description")
+
         return [HarborCheckpoint(**row) for row in result]
     except Error as e:
         print(f"Database error: {e}")
@@ -51,6 +58,7 @@ def get_all_shipments():
     finally:
         cursor.close()
         conn.close()
+
 
 
 # Get shipment based on sent_date
@@ -176,4 +184,25 @@ def update_shipment_status(harbor_id: int, shipment_id: int, status: int):
         raise HTTPException(status_code=500, detail=f"Database update failed: {e}")
     finally:
         cursor.close()
+
+# Latest shipment
+@app.get("/shipments/latest", response_model=HarborCheckpoint)
+def get_latest_shipment():
+    conn = get_new_connection()
+    if conn is None:
+        raise HTTPException(status_code=500, detail="Database connection failed")
+    cursor = conn.cursor(dictionary=True)
+    try:
+        cursor.execute("SELECT hc.*, bs.status_description AS transport_status_description" 
+                       " FROM harbor_checkpoint hc JOIN batch_status bs ON hc.transport_status = bs.status_ID ORDER BY hc.sent_date DESC LIMIT 1;")
+        result = cursor.fetchone()
+        if not result:
+            raise HTTPException(status_code=404, detail="No shipments found")
+        return HarborCheckpoint(**result)
+    except Error as e:
+        print(f"Database error: {e}")
+        raise HTTPException(status_code=500, detail=f"Database query failed: {e}")
+    finally:
+        cursor.close()
+        conn.close()
 

@@ -1,0 +1,129 @@
+.frameChild {
+  height: 132px;
+  width: 320px;
+  position: relative;
+  border-radius: var(--br-11xl);
+  background-color: var(--matcha);
+  display: none;
+  z-index: 0;
+}
+.batchId {
+  position: relative;
+  display: inline-block;
+  min-width: 58px;
+  z-index: 1;
+}
+.quickRelevantInfo {
+  align-self: stretch;
+  position: relative;
+  font-weight: 300;
+  color: var(--sand);
+  z-index: 1;
+}
+.batchIdParent {
+  width: 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-mini);
+}
+.frameItem {
+  height: 22px;
+  width: 22px;
+  position: relative;
+  border-radius: 50%;
+  background-color: var(--sand);
+  z-index: 1;
+}
+.frameInner {
+  align-self: stretch;
+  height: 1px;
+  position: relative;
+  border-top: 1px solid var(--sand);
+  box-sizing: border-box;
+  z-index: 2;
+}
+.lineWrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 0 0 var(--padding-3xs);
+}
+.ellipseDiv {
+  height: 22px;
+  width: 22px;
+  position: relative;
+  border-radius: 50%;
+  background-color: var(--sand);
+  z-index: 1;
+}
+.ellipseParent,
+.frameContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.ellipseParent {
+  flex: 1;
+  align-items: flex-end;
+}
+.frameContainer {
+  align-self: stretch;
+  align-items: flex-start;
+  padding: 0 var(--padding-10xs) 0 var(--padding-12xs);
+}
+.finishOnDate {
+  align-self: stretch;
+  position: relative;
+  font-weight: 200;
+  z-index: 1;
+}
+.frameParent,
+.frameWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.frameParent {
+  align-self: stretch;
+  gap: var(--gap-20xl);
+}
+.frameWrapper {
+  width: 131px;
+  padding: var(--padding-11xs) 0 0;
+  box-sizing: border-box;
+  text-align: right;
+  color: var(--sand);
+}
+.infoDot {
+  height: 22px;
+  width: 22px;
+  position: absolute;
+  margin: 0 !important;
+  top: 27px;
+  right: 82px;
+  border-radius: 50%;
+  background-color: var(--earth);
+  z-index: 3;
+}
+.rectangleParent {
+  align-self: stretch;
+  border-radius: var(--br-11xl);
+  background-color: var(--matcha);
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: var(--padding-6xl) var(--padding-8xl) var(--padding-5xl)
+    var(--padding-16xl);
+  position: relative;
+  gap: var(--gap-xl);
+  text-align: left;
+  font-size: var(--font-size-sm);
+  color: var(--glow);
+  font-family: var(--font-inter);
+}

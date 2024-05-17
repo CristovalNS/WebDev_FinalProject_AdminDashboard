@@ -1,0 +1,135 @@
+.frameChild {
+  align-self: stretch;
+  width: 59px;
+  position: relative;
+  border-radius: 50%;
+  background-color: var(--color-gainsboro);
+}
+.fullName,
+.location {
+  position: relative;
+  display: inline-block;
+}
+.fullName {
+  margin: 0;
+  font-size: inherit;
+  font-weight: 600;
+  font-family: inherit;
+  min-width: 95px;
+}
+.location {
+  font-size: var(--font-size-sm);
+  font-weight: 200;
+  min-width: 56px;
+}
+.frameWrapper,
+.fullNameParent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.frameWrapper {
+  justify-content: flex-end;
+  padding: 0 0 var(--padding-6xs);
+}
+.ellipseParent {
+  height: 59px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: flex-start;
+  gap: var(--gap-lgi);
+}
+.trackYourShipment {
+  position: relative;
+}
+.frameItem {
+  width: 100%;
+  border: 0;
+  outline: 0;
+  background-color: var(--sand);
+  align-self: stretch;
+  height: 40px;
+  border-radius: var(--br-11xl);
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--padding-2xs) var(--padding-10xl) var(--padding-xs);
+  box-sizing: border-box;
+  font-family: var(--font-inter);
+  font-weight: 200;
+  font-size: var(--font-size-sm);
+  color: var(--color-black);
+  min-width: 160px;
+}
+.trackYourShipmentParent {
+  flex: 1;
+  flex-direction: column;
+  gap: var(--gap-8xs);
+}
+.frameContainer,
+.frameGroup,
+.trackYourShipmentParent {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.frameContainer {
+  align-self: stretch;
+  flex-direction: row;
+  padding: 0 0 0 var(--padding-12xs);
+  font-size: var(--font-size-sm);
+}
+.frameGroup {
+  flex: 1;
+  flex-direction: column;
+  gap: var(--gap-lg);
+  min-width: 174px;
+}
+.frameInner,
+.rectangleDiv {
+  position: relative;
+  background-color: var(--color-gainsboro);
+}
+.frameInner {
+  align-self: stretch;
+  flex: 1;
+}
+.rectangleDiv {
+  width: 40px;
+  height: 40px;
+}
+.rectangleParent {
+  height: 129px;
+  width: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+  gap: var(--gap-20xl);
+}
+.frameParent,
+.mobileHarbourHomeInner {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  max-width: 100%;
+}
+.frameParent {
+  flex: 1;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--gap-9xs);
+}
+.mobileHarbourHomeInner {
+  align-self: stretch;
+  align-items: flex-start;
+  padding: 0 var(--padding-16xl) 0 var(--padding-15xl);
+  box-sizing: border-box;
+  text-align: left;
+  font-size: var(--font-size-xl);
+  color: var(--color-black);
+  font-family: var(--font-inter);
+}

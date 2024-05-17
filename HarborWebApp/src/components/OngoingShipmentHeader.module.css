@@ -1,0 +1,67 @@
+.h2,
+.ongoingShipment {
+  margin: 0;
+  position: relative;
+  font-size: inherit;
+  font-family: inherit;
+}
+.h2 {
+  font-weight: 400;
+  display: inline-block;
+  min-width: 23px;
+}
+.ongoingShipment {
+  font-weight: 600;
+}
+.ongoingShipmentWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--padding-9xs) 0 0;
+  font-size: var(--font-size-xl);
+}
+.frameChild,
+.frameParent,
+.parent {
+  align-self: stretch;
+  display: flex;
+  align-items: flex-start;
+}
+.parent {
+  flex-direction: row;
+  justify-content: space-between;
+  gap: var(--gap-xl);
+}
+.frameChild,
+.frameParent {
+  justify-content: flex-start;
+  font-family: var(--font-inter);
+}
+.frameChild {
+  width: 100%;
+  border: 0;
+  outline: 0;
+  background-color: var(--sand);
+  height: 43px;
+  border-radius: var(--br-11xl);
+  flex-direction: row;
+  padding: var(--padding-xs) var(--padding-15xl);
+  box-sizing: border-box;
+  font-weight: 200;
+  font-size: var(--font-size-base);
+  color: var(--ash);
+  min-width: 192px;
+}
+.frameParent {
+  flex-direction: column;
+  padding: 0 0 var(--padding-8xs);
+  gap: var(--gap-3xl);
+  text-align: left;
+  font-size: var(--font-size-5xl);
+  color: var(--color-black);
+}
+.backButton {
+  text-decoration: none; /* or text-decoration: inherit; */
+  /* Add other styles as needed */
+}
