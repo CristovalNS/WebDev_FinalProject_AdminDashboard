@@ -3,7 +3,7 @@ import styles from "./ShippingHistoryBody.module.css";
 const ShippingHistoryBody = () => {
   return (
     <section className={styles.rectangleParent}>
-      <div className={styles.frameChild} />
+      {/* <div className={styles.frameChild} />
       <div className={styles.batchIdParent}>
         <b className={styles.batchId}>Batch ID</b>
         <div className={styles.quickRelevantInfo}>Quick relevant info</div>
@@ -22,7 +22,7 @@ const ShippingHistoryBody = () => {
           <i className={styles.finishOnDate}>{`Finish on: <Date>`}</i>
         </div>
       </div>
-      <div className={styles.infoDot} />
+      <div className={styles.infoDot} /> */}
     </section>
   );
 };

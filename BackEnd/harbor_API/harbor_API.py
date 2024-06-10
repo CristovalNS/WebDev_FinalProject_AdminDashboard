@@ -60,7 +60,6 @@ def get_all_shipments():
         conn.close()
 
 
-
 # Get shipment based on sent_date
 @app.get("/shipments/sent_date/{date}", response_model=List[HarborCheckpoint])
 def get_shipment_by_sent_date(date: datetime):
@@ -199,6 +198,32 @@ def get_latest_shipment():
         if not result:
             raise HTTPException(status_code=404, detail="No shipments found")
         return HarborCheckpoint(**result)
+    except Error as e:
+        print(f"Database error: {e}")
+        raise HTTPException(status_code=500, detail=f"Database query failed: {e}")
+    finally:
+        cursor.close()
+        conn.close()
+
+
+# Finished shipments
+@app.get("/shipments/finished", response_model=List[HarborCheckpoint])
+def get_shipments_with_status_3():
+    conn = get_new_connection()
+    if conn is None:
+        raise HTTPException(status_code=500, detail="Database connection failed")
+    cursor = conn.cursor(dictionary=True)
+    try:
+        cursor.execute(
+            "SELECT hc.*, bs.status_description AS transport_status_description "
+            "FROM harbor_checkpoint hc "
+            "JOIN batch_status bs ON hc.transport_status = bs.status_ID "
+            "WHERE hc.transport_status = 3"
+        )
+        result = cursor.fetchall()
+        if not result:
+            raise HTTPException(status_code=404, detail="No shipments found with transport status 3")
+        return [HarborCheckpoint(**row) for row in result]
     except Error as e:
         print(f"Database error: {e}")
         raise HTTPException(status_code=500, detail=f"Database query failed: {e}")
